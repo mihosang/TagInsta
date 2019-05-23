@@ -20,16 +20,14 @@ export default class SettingsTab extends Component {
         this.instagramLogin = null;
     };
 
-    getAPI(){
-        if (!this.state.token) {
-            return ToastAndroid.show('Token is not found', ToastAndroid.SHORT);
-        }
-        const userSelfUrl = "https://api.instagram.com/v1/users/self/?access_token=" + this.state.token;
+    getAPI(token){
+        const access_token = this.state.token ? this.state.token : token;
+        const userSelfUrl = "https://api.instagram.com/v1/users/self/?access_token=" + access_token;
         fetch(userSelfUrl)
             .then((response) => response.text())
             .then((responseText) => {
-                ToastAndroid.show(responseText, ToastAndroid.SHORT);
-                this.state.response = responseText;
+                // ToastAndroid.show(responseText, ToastAndroid.SHORT);
+                this.state.user = responseText;
                 this.render();
             })
             .catch((error) => {
@@ -72,7 +70,10 @@ export default class SettingsTab extends Component {
                         </TouchableOpacity>
                         <Button
                             title="Go to Details"
-                            onPress={() => this.props.navigation.navigate('Post', this.state)}
+                            onPress={() => this.props.navigation.navigate('Camera', {
+                                user: this.state.user,
+                                token: this.state.token
+                            })}
                         />
                     </View>)
                 }
@@ -91,7 +92,10 @@ export default class SettingsTab extends Component {
                     clientId='e933365d338c4ac6a928afa990398386'
                     redirectUrl='http://blog.naver.com/teantin'
                     scopes={['public_content', 'follower_list']}
-                    onLoginSuccess={(token) => this.setState({ token })}
+                    onLoginSuccess={(token) => {
+                        this.setState({ token });
+                        this.getAPI(token);
+                    }}
                     onLoginFailure={(data) => this.setState({ failure: data })}
                 />
             </View>

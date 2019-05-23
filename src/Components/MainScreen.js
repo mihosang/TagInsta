@@ -14,10 +14,11 @@ import SettingsTab from "./AppTabNavigator/SettingsTab";
 import PostTab from "./AppTabNavigator/PostTab";
 
 const AppTabNavigator = createBottomTabNavigator({
+    Settings: {screen: SettingsTab},
     Camera: {screen: CameraTab},
-    // Gallery: {screen: GalleryTab},
-    Post: {screen: PostTab},
-    Settings: {screen: SettingsTab}
+    Gallery: {screen: GalleryTab},
+    Post: {screen: PostTab}
+
 });
 
 const AppTabContainer = createAppContainer(AppTabNavigator);

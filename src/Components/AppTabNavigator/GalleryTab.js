@@ -9,10 +9,20 @@ export default class GalleryTab extends Component {
         tabBarIcon: ({ tintColor }) => (
             <Icon name='ios-search' style={{ color: tintColor }} />
         )
-    }
+    };
     constructor(props) {
         super();
-        // this.pickSingle(false);
+
+    };
+    componentDidMount() {
+        const { navigation } = this.props;
+        navigation.addListener('willFocus', () =>
+            // this.setState({ focusedScreen: true });
+            this.pickSingle(false)
+        );
+        navigation.addListener('willBlur', () =>
+            this.setState({ focusedScreen: false })
+        );
     }
 
     pickSingle(cropit, circular=false, mediaType) {

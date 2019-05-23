@@ -18,18 +18,14 @@ export default class PostTab extends Component {
 
     render() {
         const { navigation } = this.props;
-        const username = navigation.getParam('username', 'NO-ID');
-        const date = navigation.getParam('date', 'NO-TOKEN');
-        const token = navigation.getParam('token', 'NO-TOKEN');
-
-        this.setState({'username',navigation.getParam('username', 'NO-ID')});
-        this.setState('date',navigation.getParam('date', 'NO-TOKEN'));
-        this.setState('token',navigation.getParam('token', 'NO-TOKEN'));
-        ToastAndroid.show(this.state, ToastAndroid.SHORT);
         const data = {
-            username: username,
-            date: date
+            token: navigation.getParam('token', 'NO-TOKEN'),
+            user: navigation.getParam('user', {}),
+            image: navigation.getParam('image', 'https://user-images.githubusercontent.com/3969643/51441420-b41f1c80-1d14-11e9-9f5d-af5cd3a6aaae.png')
+            // tags: navigation.getParam('tags', 'NO-TAGS')
         };
+        console.log(data);
+        // ToastAndroid.show(JSON.stringify(data), ToastAndroid.SHORT);
         return (
             <Container style={style.container}>
                 <Content>
