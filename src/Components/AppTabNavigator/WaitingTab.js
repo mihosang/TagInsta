@@ -25,8 +25,7 @@ export default class WaitingTab extends Component {
         let post_data = {
             method: 'POST',
             body: JSON.stringify({
-                // 'filename': 'image.jpg'
-                'filename': 'test2.jpeg'
+                'filename': 'image.jpg'
             }),
             headers: {
                 'Accept':       'application/json',
