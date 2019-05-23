@@ -45,7 +45,7 @@ export default class CameraTab extends Component {
         fetch(url, post_data)
             .then((response) => response.text())
             .then((responseText) => {
-                ToastAndroid.show(responseText, ToastAndroid.SHORT);
+                console.log(responseText);
                 this.state.tags = responseText;
                 // navigate to post tab
                 this.props.navigation.navigate('Post', {
@@ -56,7 +56,6 @@ export default class CameraTab extends Component {
                 });
             })
             .catch((error) => {
-                ToastAndroid.show(error.toString(), ToastAndroid.SHORT);
                 console.log(error.toString());
             });
     }
@@ -111,7 +110,6 @@ export default class CameraTab extends Component {
             user: navigation.getParam('user', {})
         };
         this.state.data = data;
-        ToastAndroid.show(JSON.stringify(this.state.data), ToastAndroid.SHORT);
 
         const { hasCameraPermission, focusedScreen } = this.state;
         if (hasCameraPermission === null) {

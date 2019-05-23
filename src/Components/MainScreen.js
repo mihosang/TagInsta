@@ -1,35 +1,33 @@
 import React, { Component } from 'react';
-import {
-    StyleSheet,
-    Text,
-    View
-} from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import { Icon } from 'native-base';
-import { createAppContainer ,createBottomTabNavigator} from 'react-navigation';
+import { createAppContainer ,createStackNavigator, createBottomTabNavigator} from 'react-navigation';
 
 import CameraTab from './AppTabNavigator/CameraTab'
 import GalleryTab from './AppTabNavigator/GalleryTab'
 import SettingsTab from "./AppTabNavigator/SettingsTab";
 import PostTab from "./AppTabNavigator/PostTab";
+import MainTab from "./AppTabNavigator/MainTab";
 
-const AppTabNavigator = createBottomTabNavigator({
+const AppTabNavigator = createStackNavigator({
     Settings: {screen: SettingsTab},
     Camera: {screen: CameraTab},
     Gallery: {screen: GalleryTab},
-    Post: {screen: PostTab}
-
+    Post: {screen: PostTab},
+    Main: {screen: MainTab}
 });
 
-const AppTabContainer = createAppContainer(AppTabNavigator);
-
+export default createAppContainer(AppTabNavigator);
+// const AppTabContainer = createAppContainer(AppTabNavigator);
+/*
 export default class MainScreen extends Component {
     // navigationOptions 코드 추가
-    static navigationOptions = {
-        headerLeft: <Icon name="md-camera" style={{paddingLeft:10}} />,
-        title: "Tag Inssa",
-        headerRight: <Icon name="md-send"  style={{paddingRight:10}} />
-    };
+    // static navigationOptions = {
+    //     headerLeft: <Icon name="ios-close" style={{paddingLeft:10}} />,
+    //     title: "Generated Hashtags",
+    //     headerRight: <Icon name="logo-instagram"  style={{paddingRight:10}} />
+    // };
 
     render() {
         return <AppTabContainer/>
@@ -43,3 +41,5 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
 });
+
+ */

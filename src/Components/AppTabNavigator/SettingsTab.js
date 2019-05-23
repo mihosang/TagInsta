@@ -1,22 +1,20 @@
 import React, { Component } from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, ToastAndroid, Button} from 'react-native';
-import {Icon} from "native-base";
-
+import {View, StyleSheet, TouchableOpacity, ToastAndroid, Image} from 'react-native';
+import {Container, Header, Content, Body, Button, Text, Icon, Left, Right} from "native-base";
 import InstagramLogin from 'react-native-instagram-login'
 
+import asset_login_slogan from '../../../assets/login/Login_Slogan.png'
+import asset_login_image from '../../../assets/login/Login_Image.png'
+
 export default class SettingsTab extends Component {
-    static navigationOptions = {
-        tabBarIcon: ({ tintColor }) => (
-            <Icon name='ios-settings' style={{ color: tintColor }} />
-        )
-    };
+    // static navigationOptions = {
+    //     tabBarIcon: ({ tintColor }) => (
+    //         <Icon name='ios-settings' style={{ color: tintColor }} />
+    //     )
+    // };
     constructor(props) {
         super(props);
-        this.state = {
-            username : 'teantin2',
-            date : '2019 01 26'
-        };
-
+        this.state = {};
         this.instagramLogin = null;
     };
 
@@ -28,65 +26,42 @@ export default class SettingsTab extends Component {
             .then((responseText) => {
                 // ToastAndroid.show(responseText, ToastAndroid.SHORT);
                 this.state.user = responseText;
-                this.render();
+                // move to CameraTab
+                this.props.navigation.navigate('Camera', {
+                    user: this.state.user,
+                    token: this.state.token
+                })
             })
             .catch((error) => {
                 ToastAndroid.show(error.toString(), ToastAndroid.SHORT);
             });
     }
 
-    renderLogin() {
-        return <TouchableOpacity style={{ borderRadius: 5, backgroundColor: 'orange', height: 30, width: 100, justifyContent: 'center', alignItems: 'center' }} onPress={() => this.instagramLogin.show()}>
-            <Text style={{ color: 'black' }}>Login</Text>
-        </TouchableOpacity>
-    }
-
-    renderLogout() {
-        return
-        <View>
-            <Text style={{ margin: 20 }}>token: {this.state.token}</Text>
-            <TouchableOpacity style={{ borderRadius: 5, backgroundColor: 'red', height: 30, width: 100, justifyContent: 'center', alignItems: 'center' }} onPress={() => this.getAPI()}>
-                <Text style={{ color: 'black' }}>Get API</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={{ borderRadius: 5, backgroundColor: 'green', height: 30, width: 100, justifyContent: 'center', alignItems: 'center' }} onPress={() => this.logout()}>
-                <Text style={{ color: 'black' }}>Logout</Text>
-            </TouchableOpacity>
-
-        </View>
-    }
-
-
     render() {
         return (
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                {!this.state.token ? this.renderLogin()
-                 : (<View>
-                        <Text style={{ margin: 20 }}>token: {this.state.token}</Text>
-                        <TouchableOpacity style={{ borderRadius: 5, backgroundColor: 'red', height: 30, width: 100, justifyContent: 'center', alignItems: 'center' }} onPress={() => this.getAPI()}>
-                            <Text style={{ color: 'black' }}>Get API</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={{ borderRadius: 5, backgroundColor: 'green', height: 30, width: 100, justifyContent: 'center', alignItems: 'center' }} onPress={() => this.logout()}>
-                            <Text style={{ color: 'black' }}>Logout</Text>
-                        </TouchableOpacity>
-                        <Button
-                            title="Go to Details"
-                            onPress={() => this.props.navigation.navigate('Camera', {
-                                user: this.state.user,
-                                token: this.state.token
-                            })}
-                        />
-                    </View>)
-                }
+            <View style={style.container}>
+                {/*this.renderLogin()*/}
 
-                {this.state.response && <View>
-                    <Text style={{ margin: 20 }}>response: {this.state.response}</Text>
-                    </View>
-                }
 
-                {this.state.failure && <View>
-                    <Text style={{ margin: 10 }}>failure: {JSON.stringify(this.state.failure)}</Text>
-                    </View>
-                }
+                <View style={style.loginImage}>
+                    <Image source={asset_login_image} style={{height:'100%',width:'100%',resizeMode:'cover'}} />
+                </View>
+                <View style={style.loginSlogan}>
+                    <Image source={asset_login_slogan} style={{height:'100%',width:'100%',resizeMode:'contain'}} />
+                </View>
+                <View style={style.loginButtons}>
+                    <Button bordered onPress={() => this.instagramLogin.show()}>
+                        <Text>Login</Text>
+                    </Button>
+                    <View style={{width:20}}></View>
+                    <Button bordered onPress={() => this.instagramLogin.show()}>
+                        <Text>Signup</Text>
+                    </Button>
+                </View>
+                <View style={style.Bottoms}>
+                </View>
+
+
                 <InstagramLogin
                     ref= {ref => this.instagramLogin= ref}
                     clientId='e933365d338c4ac6a928afa990398386'
@@ -106,6 +81,32 @@ export default class SettingsTab extends Component {
 const style = StyleSheet.create({
     container: {
         flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    loginImage: {
+        width:'100%',
+        height:'60%',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    loginSlogan: {
+        width:'100%',
+        height:'20%',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    loginButtons: {
+        // width:'30%',
+        // height:'5%',
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    Bottoms: {
+        width:'100%',
+        height:'15%',
         alignItems: 'center',
         justifyContent: 'center',
     }
