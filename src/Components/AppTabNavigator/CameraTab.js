@@ -66,7 +66,7 @@ export default class CameraTab extends Component {
         if (!this.camera) {
             return ToastAndroid.show("Error Camera object is null", ToastAndroid.SHORT);
         } else {
-            const options = {quality: 0.5, base64: true};
+            const options = {quality: 0.5, base64: false, fixOrientation: true};
             const data = await this.camera.takePictureAsync(options);
             console.log(data.uri);
 
