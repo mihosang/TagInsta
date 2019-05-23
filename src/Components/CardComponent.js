@@ -7,14 +7,16 @@ export default class CardComponent extends Component{
 
     render(){
         const data = this.props.data;
+        console.log(data);
         const token = data.token;
         const userInfo = data.user;
         const jUserInfo = JSON.parse(userInfo);
         const image = data.image;
         const profile_picture = jUserInfo.data.profile_picture;
-        const text = '이번에는 리액트 네이티브(React Native)로 인스타그램 UI을 구현하는 포스팅입니다. 다른 앱을 따라 만들어 보는 것은 굉장히 재미있습니다. 구글에서 인스타그램 클론 코딩 강의를 찾아보니, 다른 개발자들이 올린 동영상 강의를 몇 개 찾을 수 있었습니다.';
+        const tags = data.tags;
+        const caption = data.caption;
         return (
-            <Card>
+            <Card style={{marginLeft:0,marginRight:0, width:800}}>
                 <CardItem header>
                     <Left>
                         <Thumbnail source={{uri: profile_picture}}/>
@@ -27,8 +29,7 @@ export default class CardComponent extends Component{
                 <CardItem cardBody>
                     <Image
                         source={{uri: image}}
-                        // style={{height: 400, width: null, flex: 1}}
-                        style={{height:400,width:800, flex:1}}/>
+                        style={{ height:400, width:null, flex: 1 , resizeMode:'cover'}}/>
                 </CardItem>
                 <CardItem style={{height: 45}}>
                     <Left>
@@ -44,26 +45,18 @@ export default class CardComponent extends Component{
                     </Left>
                 </CardItem>
                 <CardItem>
-                    <Text>
-                        <Text style={{fontWeight: '900'}}>Tag</Text>
-                        {text}
-                    </Text>
+                    <Text style={{fontWeight: '900'}}>Image Caption</Text>
                 </CardItem>
                 <CardItem>
-
-                    <Button bordered>
-                        <Icon name='ios-heart' style={{color: 'black'}}/>
-                        <Text> BTS </Text>
-                    </Button >
-                    <Button bordered>
-                        <Icon name='ios-heart' style={{color: 'black'}}/>
-                        <Text> I_LOVE_BTS_WANNA_BE_ARMY </Text>
-                    </Button>
-                        <Button bordered>
-                            <Icon name='ios-heart' style={{color: 'black'}}/>
-                            <Text> BTS_ARMY </Text>
-                        </Button>
-
+                    <Text> {caption}</Text>
+                </CardItem>
+                <CardItem>
+                    <Text style={{fontWeight: '900'}}>Tags</Text>
+                </CardItem>
+                <CardItem>
+                    { tags.map( (tag,i) =>
+                        <Text key={i}> {tag} </Text>
+                    )}
                 </CardItem>
             </Card>
         );

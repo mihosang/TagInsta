@@ -9,13 +9,15 @@ import GalleryTab from './AppTabNavigator/GalleryTab'
 import SettingsTab from "./AppTabNavigator/SettingsTab";
 import PostTab from "./AppTabNavigator/PostTab";
 import MainTab from "./AppTabNavigator/MainTab";
+import WaitingTab from "./AppTabNavigator/WaitingTab";
 
 const AppTabNavigator = createStackNavigator({
     Settings: {screen: SettingsTab},
     Camera: {screen: CameraTab},
     Gallery: {screen: GalleryTab},
     Post: {screen: PostTab},
-    Main: {screen: MainTab}
+    MainTab : {screen: MainTab},
+    WaitTab: {screen: WaitingTab}
 });
 
 export default createAppContainer(AppTabNavigator);

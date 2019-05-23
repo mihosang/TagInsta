@@ -27,7 +27,7 @@ export default class SettingsTab extends Component {
                 // ToastAndroid.show(responseText, ToastAndroid.SHORT);
                 this.state.user = responseText;
                 // move to CameraTab
-                this.props.navigation.navigate('Camera', {
+                this.props.navigation.navigate('MainTab', {
                     user: this.state.user,
                     token: this.state.token
                 })
@@ -50,12 +50,12 @@ export default class SettingsTab extends Component {
                     <Image source={asset_login_slogan} style={{height:'100%',width:'100%',resizeMode:'contain'}} />
                 </View>
                 <View style={style.loginButtons}>
-                    <Button bordered onPress={() => this.instagramLogin.show()}>
-                        <Text>Login</Text>
+                    <Button bordered rounded onPress={() => this.instagramLogin.show()}>
+                        <Text>Log In</Text>
                     </Button>
-                    <View style={{width:20}}></View>
-                    <Button bordered onPress={() => this.instagramLogin.show()}>
-                        <Text>Signup</Text>
+                    <View style={{width:30}}></View>
+                    <Button block rounded onPress={() => this.instagramLogin.show()}>
+                        <Text style={{color:'white'}}>Sign Up</Text>
                     </Button>
                 </View>
                 <View style={style.Bottoms}>
@@ -92,7 +92,7 @@ const style = StyleSheet.create({
     },
     loginSlogan: {
         width:'100%',
-        height:'20%',
+        height:'25%',
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -106,7 +106,7 @@ const style = StyleSheet.create({
     },
     Bottoms: {
         width:'100%',
-        height:'15%',
+        height:'10%',
         alignItems: 'center',
         justifyContent: 'center',
     }

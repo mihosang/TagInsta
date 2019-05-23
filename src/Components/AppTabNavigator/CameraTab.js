@@ -74,7 +74,7 @@ export default class CameraTab extends Component {
                     this.setState({image: data.uri});
                     console.log(this.state);
                     // this.getSuggestTagList(['bts', 'couple']);
-                    this.props.navigation.navigate('Post', {
+                    this.props.navigation.navigate('WaitTab', {
                         user: this.state.data.user,
                         token: this.state.data.token,
                         image: data.uri
@@ -110,7 +110,7 @@ export default class CameraTab extends Component {
             user: navigation.getParam('user', {})
         };
         this.state.data = data;
-
+        console.log(data);
         const { hasCameraPermission, focusedScreen } = this.state;
         if (hasCameraPermission === null) {
             return <View />;

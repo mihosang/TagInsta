@@ -12,7 +12,7 @@ export default class GalleryTab extends Component {
     };
     constructor(props) {
         super();
-
+        this.state = {};
     };
     componentDidMount() {
         const { navigation } = this.props;
@@ -37,18 +37,33 @@ export default class GalleryTab extends Component {
             compressVideoPreset: 'MediumQuality',
             includeExif: true,
         }).then(image => {
-            ToastAndroid.show('received image : '+ image.path, ToastAndroid.SHORT);
-            this.setState({
-                image: {uri: image.path, width: image.width, height: image.height, mime: image.mime},
-                images: null
+            // ToastAndroid.show('received image : '+ image.path, ToastAndroid.SHORT);
+            // this.setState({
+            //     image: {uri: image.path, width: image.width, height: image.height, mime: image.mime},
+            //     images: null
+            // });
+            this.setState({image: image.path});
+            console.log(this.state);
+            // this.getSuggestTagList(['bts', 'couple']);
+            this.props.navigation.navigate('WaitTab', {
+                user: this.state.data.user,
+                token: this.state.data.token,
+                image: image.path
             });
         }).catch(e => {
             console.log(e);
-            Alert.alert(e.message ? e.message : e);
+            // Alert.alert(e.message ? e.message : e);
+            this.props.navigation.goBack();
         });
     }
 
     render() {
+        const { navigation } = this.props;
+        const data = {
+            token: navigation.getParam('token', 'NO-TOKEN'),
+            user: navigation.getParam('user', {})
+        };
+        this.state.data = data;
         return (
             <View style={style.container}>
                 <Text>GalleryTab</Text>
