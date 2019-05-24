@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { View, Image, Text, StyleSheet, ToastAndroid } from 'react-native';
-import { Card, CardItem, Thumbnail, Body, Left, Right, Button, Icon } from 'native-base';
+import { Image, Text, StyleSheet } from 'react-native';
+import { Card, CardItem, Thumbnail, Body, Left, Button, Icon } from 'native-base';
 
 
 export default class CardComponent extends Component{
@@ -29,7 +29,8 @@ export default class CardComponent extends Component{
                 <CardItem cardBody>
                     <Image
                         source={{uri: image}}
-                        style={{ height:400, width:null, flex: 1 , resizeMode:'cover'}}/>
+                        style={{ height:400, width: null, flex: 1 , resizeMode:'cover'}}/>
+                    {/*style={{ resizeMode:'cover'}}/>*/}
                 </CardItem>
                 <CardItem style={{height: 45}}>
                     <Left>
@@ -48,16 +49,18 @@ export default class CardComponent extends Component{
                     <Text style={{fontWeight: '900'}}>Image Caption</Text>
                 </CardItem>
                 <CardItem>
-                    <Text> {caption}</Text>
+                    <Text style={{color: 'black', fontWeight:'bold', fontSize:18}}> {caption}</Text>
                 </CardItem>
                 <CardItem>
                     <Text style={{fontWeight: '900'}}>Tags</Text>
                 </CardItem>
-                <CardItem>
+                {/*<CardItem>*/}
                     { tags.map( (tag,i) =>
-                        <Text key={i}> {tag} </Text>
+                        <CardItem  key={i}>
+                        <Text style={{color: 'blue', fontWeight:'bold', fontSize:18}}> {tag} </Text>
+                        </CardItem>
                     )}
-                </CardItem>
+                {/*</CardItem>*/}
             </Card>
         );
     }

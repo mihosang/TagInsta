@@ -21,7 +21,7 @@ export default class WaitingTab extends Component {
     }
 
     getSuggestTagList() {
-        const url = "http://2a01e6a6.ngrok.io/tag2";
+        const url = "http://5df3fe76.ngrok.io/tag2";
         let post_data = {
             method: 'POST',
             body: JSON.stringify({
@@ -64,7 +64,7 @@ export default class WaitingTab extends Component {
 
         const formdata = new FormData();
         formdata.append('file', file);
-        const url = 'http://2a01e6a6.ngrok.io/tag';
+        const url = 'http://5df3fe76.ngrok.io/tag';
         fetch(url, {
             method: 'POST',
             body : formdata,
