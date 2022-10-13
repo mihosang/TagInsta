@@ -7,7 +7,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "native-base": "^2.12.1",
+    "native-base": "^2.15.2",
     "react": "^16.8.6",
     "react-native": "^0.62.3",
     "react-native-camera": "^2.11.1",
